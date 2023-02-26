@@ -1,6 +1,6 @@
 {
     "name": "vuepress-plugin-github-linkify",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Finding and fixing GitHub links",
     "author": {
         "name": "Andrey Helldar",
@@ -38,7 +38,9 @@
         "node": ">=18.14"
     },
     "scripts": {
-        "build": "tsc -b tsconfig.json"
+        "build": "tsc -b tsconfig.json",
+        "release:publish": "pnpm -r publish",
+        "release:version": "bumpp package.json --commit=\"build: publish v%s\" --all"
     },
     "peerDependencies": {
         "vite": "^4.0.0"
@@ -50,6 +52,7 @@
         "@types/node": "^18.14.1",
         "@vuepress/core": "^2.0.0-beta.60",
         "@vuepress/markdown": "^2.0.0-beta.60",
+        "bumpp": "^9.0.0",
         "markdown-it": "^13.0.1",
         "tsconfig-vuepress": "^4.0.4",
         "typescript": "^4.9.5",
