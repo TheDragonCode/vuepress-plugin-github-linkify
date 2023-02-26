@@ -14,10 +14,10 @@ const transformers = [
     simpleCompact
 ]
 
-export const transform = (text: string, repo: string) => {
-    repo = repo.replace('https://github.com/', '')
+const resolveRepoUrl = (url: string) => url.replace('https://github.com/', '')
 
-    Array.from(transformers, (tranformer: GitHubLinkifyTransformer) => text = tranformer(text, repo))
+export const transform = (text: string, repo: string) => {
+    Array.from(transformers, (tranformer: GitHubLinkifyTransformer) => text = tranformer(text, resolveRepoUrl(repo)))
 
     return text
 }
