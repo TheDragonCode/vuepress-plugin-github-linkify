@@ -1,6 +1,6 @@
 # Vuepress Plugin GitHub Linkify
 
-![the dragon code github linkify](https://preview.dragon-code.pro/the-dragon-code/github-linkify.svg)
+![the dragon code github linkify](https://preview.dragon-code.pro/the-dragon-code/github-linkify.svg?brand=vuepress&invert=1)
 
 Finding and fixing GitHub links
 
