@@ -38,9 +38,7 @@
         "node": ">=18.14"
     },
     "scripts": {
-        "dev": "vite",
-        "build": "tsc -b tsconfig.json",
-        "build1": "tsc && vite build"
+        "build": "tsc -b tsconfig.json"
     },
     "peerDependencies": {
         "vite": "^4.0.0"
