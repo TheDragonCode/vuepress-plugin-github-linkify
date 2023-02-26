@@ -1,1 +1,1 @@
-export declare type GitHubLinkifyTransformer = (text: string) => string
+export declare type GitHubLinkifyTransformer = (text: string, repo: string) => string

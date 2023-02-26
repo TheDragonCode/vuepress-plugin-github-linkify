@@ -1,5 +1,7 @@
 import { transform } from '../node/plugins/transformers'
 
 (() => {
-    document.body.innerHTML = transform(document.body.innerHTML)
+    const repo = 'https://github.com/Laravel-Lang/common'
+
+    document.body.innerHTML = transform(document.body.innerHTML, repo)
 })()
