@@ -52,6 +52,7 @@
         "@types/node": "^18.14.1",
         "@vuepress/core": "^2.0.0-beta.60",
         "@vuepress/markdown": "^2.0.0-beta.60",
+        "@vuepress/utils": "^2.0.0-beta.60",
         "bumpp": "^9.0.0",
         "markdown-it": "^13.0.1",
         "tsconfig-vuepress": "^4.0.4",

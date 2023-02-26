@@ -1,12 +1,18 @@
-import type { Plugin } from '@vuepress/core'
+import type { Page, Plugin } from '@vuepress/core'
+import { fs } from '@vuepress/utils'
+import { transform } from './plugins/transformers'
 
-export const githubLinkifyPlugin = (): Plugin => {
-    return {
-        name: 'github-linkify-plugin',
-        multiple: true,
+export const githubLinkifyPlugin = (): Plugin => ({
+    name: 'github-linkify-plugin',
+    multiple: true,
 
-        extendsPage: (page) => {
-            console.log('github linkify', page, page.data)
-        }
+    onGenerated: (app) => {
+        app.pages.forEach((page: Page) => {
+            const filePath = page.componentFilePath
+
+            const content = fs.readFileSync(filePath, 'utf8')
+
+            fs.writeFileSync(filePath, transform(content))
+        })
     }
-}
+})
