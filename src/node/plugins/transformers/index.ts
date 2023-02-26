@@ -4,22 +4,19 @@ import { usernameCompact, usernameExpand } from './username.js'
 import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
 import { compareCompact, compareExpand } from './compare.js'
 import { commitCompact, commitExpand } from './commit.js'
-import { simpleCompact, simpleExpand } from './simple.js'
 
 const compact = [
     usernameCompact,
     pullRequestCompact,
     compareCompact,
-    commitCompact,
-    simpleCompact
+    commitCompact
 ]
 
 const expand = [
     usernameExpand,
     pullRequestExpand,
     compareExpand,
-    commitExpand,
-    simpleExpand
+    commitExpand
 ]
 
 const resolveRepoUrl = (url: string) => url.replace('https://github.com/', '')
