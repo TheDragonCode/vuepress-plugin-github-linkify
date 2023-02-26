@@ -1,6 +1,6 @@
 {
     "name": "vuepress-plugin-github-linkify",
-    "version": "1.0.0-beta.5",
+    "version": "1.0.0-beta.6",
     "description": "Finding and fixing GitHub links",
     "author": {
         "name": "Andrey Helldar",
@@ -42,7 +42,7 @@
         "dev": "vite",
         "build": "npm run clean && tsc -b tsconfig.json",
         "clean": "rimraf lib tsconfig.tsbuildinfo",
-        "release:version": "bumpp package.json --commit=\"build: publish v%s\" --all"
+        "release:version": "git add . && bumpp package.json --commit=\"Release v%s\" --all"
     },
     "peerDependencies": {
         "vite": "^4.1.3"
