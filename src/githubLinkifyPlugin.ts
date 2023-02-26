@@ -1,10 +1,8 @@
 import type { Plugin } from '@vuepress/core'
 
-export type RenderPlaceFunction = (info: string) => string
-
-export const GithubLinkify = (): Plugin => {
+export const GithubLinkifyPlugin = (): Plugin => {
     return {
-        name: 'github-linkify',
+        name: 'github-linkify-plugin',
         multiple: true,
 
         extendsPage: (page) => {

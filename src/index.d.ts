@@ -1,4 +1,4 @@
-declare module 'github-linkify'
+declare module 'github-linkify-plugin'
 {
     import type { PluginWithParams } from 'markdown-it'
 
