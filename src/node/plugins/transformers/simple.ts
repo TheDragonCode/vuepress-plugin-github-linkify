@@ -13,7 +13,7 @@ export const simpleCompact: GitHubLinkifyTransformer = (text: string, repo: stri
             : value.replace(item[0], template('simple', repo))
     }
 
-    text = regex(text, /<\s*a.*>.*https:\/\/github\.com\/?([\w\d\-_]*)\/?([\w\d\-_]*)\/?.*<\/\s*a\s*>/gs, replacer)
+    text = regex(text, /<a.*>.*https:\/\/github\.com\/?([\w\d\-_]*)\/?([\w\d\-_]*)\/?.*<\/\s*a\s*>/gs, replacer)
     text = regex(text, /https:\/\/github\.com\/?([\w\d\-_]*)\/?([\w\d\-_]*)\/?/g, replacer)
 
     return text
