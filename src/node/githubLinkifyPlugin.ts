@@ -11,7 +11,7 @@ export const githubLinkifyPlugin = ({ repo }: GithubLinkifyOptions): Plugin => {
     const plugin: PluginObject = {
         name: 'github-linkify-plugin',
         multiple: true,
-        onGenerated: (app) => {
+        onPrepared: (app) => {
             app.pages.forEach((page: Page) => {
                 const filePath = page.componentFilePath
 
