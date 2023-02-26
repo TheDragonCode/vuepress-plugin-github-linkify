@@ -8,7 +8,7 @@ Finding and fixing GitHub links
 [![NPM downloads][npm-downloads-image]][npm-downloads-url]
 [![MIT License][license-image]][license-url]
 
-## Installation
+## Usage
 
 ```bash
 npm i -D vuepress-plugin-github-linkify
