@@ -14,7 +14,7 @@ export const usernameCompact: GitHubLinkifyTransformer = (text: string, repo: st
 }
 
 export const usernameExpand: GitHubLinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => value.replace(item[0], url(`@${ item[1] }`, `https://github.com/${ item[1] }`))
+    const replacer = (value, item) => value.replace(item[0], url(`@${ item[1] }`, item[1]))
 
     text = regex(text, /::username::([\w\d\-_]+)::/g, replacer)
 

@@ -1,3 +1,3 @@
 export const url = (value: string, link: string) => {
-    return `<a href="${ link }" target="_blank">${ value }</a>`
+    return `<a href="https://github.com/${ link }" target="_blank" rel="noopener noreferrer">${ value }</a>`
 }

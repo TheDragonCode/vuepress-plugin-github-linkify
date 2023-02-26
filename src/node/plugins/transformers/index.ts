@@ -1,7 +1,7 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 
 import { usernameCompact, usernameExpand } from './username.js'
-import { pullRequestCompact } from './pull-request.js'
+import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
 import { compareCompact } from './compare.js'
 import { commitCompact } from './commit.js'
 import { simpleCompact } from './simple.js'
@@ -15,7 +15,8 @@ const compact = [
 ]
 
 const expand = [
-    usernameExpand
+    usernameExpand,
+    pullRequestExpand
 ]
 
 const resolveRepoUrl = (url: string) => url.replace('https://github.com/', '')
