@@ -28,6 +28,21 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 }
 ```
 
+## Example
+
+### Before
+
+![before](.github/images/before.png)
+
+### After
+
+![before](.github/images/after.png)
+
+## License
+
+This package is licensed under the [MIT License][license-url].
+
+
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
 
 [license-url]: LICENSE
