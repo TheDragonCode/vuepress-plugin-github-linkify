@@ -1,0 +1,60 @@
+{
+    "name": "vuepress-plugin-github-linkify",
+    "version": "0.0.1",
+    "description": "Finding and fixing GitHub links",
+    "author": {
+        "name": "Andrey Helldar",
+        "email": "helldar@dragon-code.pro",
+        "url": "https://dragon-code.pro"
+    },
+    "license": "MIT",
+    "keywords": [
+        "vuepress-plugin",
+        "vuepress",
+        "github",
+        "link",
+        "linkify",
+        "github-linkify"
+    ],
+    "homepage": "https://github.com/TheDragonCode/vuepress-plugin-github-linkify",
+    "bugs": {
+        "url": "https://github.com/TheDragonCode/vuepress-plugin-github-linkify"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TheDragonCode/vuepress-plugin-github-linkify"
+    },
+    "exports": {
+        ".": "./lib/node/index.js",
+        "./package.json": "./package.json"
+    },
+    "main": "./lib/node/index.js",
+    "module": "./lib/node/index.mts",
+    "types": "./lib/node/index.d.ts",
+    "files": [
+        "lib"
+    ],
+    "engines": {
+        "node": ">=18.14"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b tsconfig.json",
+        "build1": "tsc && vite build"
+    },
+    "peerDependencies": {
+        "vite": "^4.0.0"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+        "@types/markdown-it": "^12.2.3",
+        "@types/node": "^18.14.1",
+        "@vuepress/core": "^2.0.0-beta.60",
+        "@vuepress/markdown": "^2.0.0-beta.60",
+        "markdown-it": "^13.0.1",
+        "tsconfig-vuepress": "^4.0.4",
+        "typescript": "^4.9.5",
+        "vite": "^4.1.3"
+    }
+}
