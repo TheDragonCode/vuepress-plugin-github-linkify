@@ -3,5 +3,8 @@
         "rootDir": "./src",
         "outDir": "./lib"
     },
-    "extends": "./tsconfig.build.json"
+    "extends": "./tsconfig.build.json",
+    "include": [
+        "./src"
+    ]
 }

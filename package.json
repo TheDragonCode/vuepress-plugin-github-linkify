@@ -8,6 +8,7 @@
         "url": "https://dragon-code.pro"
     },
     "license": "MIT",
+    "type": "module",
     "keywords": [
         "vuepress-plugin",
         "vuepress",

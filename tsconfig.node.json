@@ -9,6 +9,5 @@
         "skipLibCheck": true,
         "target": "ES2020"
     },
-    "extends": "tsconfig-vuepress/base.json",
-    "include": ["src/**/*.ts"]
+    "extends": "tsconfig-vuepress/base.json"
 }
