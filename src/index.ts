@@ -1,5 +1,5 @@
-import { GithubLinkifyPlugin } from './githubLinkifyPlugin'
+import { githubLinkifyPlugin } from './githubLinkifyPlugin'
 
 export * from './githubLinkifyPlugin'
 
-export default GithubLinkifyPlugin
+export default githubLinkifyPlugin
