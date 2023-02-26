@@ -39,7 +39,8 @@
         "node": ">=18.14"
     },
     "scripts": {
-        "build": "tsc -b tsconfig.json",
+        "build": "npm run clean && tsc -b tsconfig.json",
+        "clean": "rimraf lib tsconfig.tsbuildinfo",
         "release:version": "bumpp package.json --commit=\"build: publish v%s\" --all"
     },
     "peerDependencies": {
@@ -55,6 +56,7 @@
         "@vuepress/utils": "^2.0.0-beta.60",
         "bumpp": "^9.0.0",
         "markdown-it": "^13.0.1",
+        "rimraf": "^4.1.2",
         "tsconfig-vuepress": "^4.0.4",
         "typescript": "^4.9.5",
         "vite": "^4.1.3"
