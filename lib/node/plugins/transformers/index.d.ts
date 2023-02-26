@@ -1,1 +1,1 @@
-export declare const transform: (text: string) => string;
+export declare const transform: (text: string, repo: string) => string;

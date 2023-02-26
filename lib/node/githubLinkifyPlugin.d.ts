@@ -1,2 +1,5 @@
 import type { Plugin } from '@vuepress/core';
-export declare const githubLinkifyPlugin: () => Plugin;
+export interface GithubLinkifyOptions {
+    repo: string;
+}
+export declare const githubLinkifyPlugin: ({ repo }: GithubLinkifyOptions) => Plugin;

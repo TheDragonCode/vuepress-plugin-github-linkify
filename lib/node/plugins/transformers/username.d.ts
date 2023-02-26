@@ -1,2 +1,2 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js';
-export declare const usernameTransformer: GitHubLinkifyTransformer;
+export declare const usernameCompact: GitHubLinkifyTransformer;
