@@ -1,5 +1,5 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
-import { regex } from '../regex'
+import { regex } from '../regex.js'
 
 export const commitTransformer: GitHubLinkifyTransformer = (text: string) => {
     const replacer = (value, item) => text.replace(item[0], `::commit::${ item[1] }/${ item[2] }::${ item[3] }::`)
