@@ -1,8 +1,8 @@
-import { usernameTransformer } from './username'
-import { pullRequestTransformer } from './pull-request'
-import { compareTransformer } from './compare'
-import { commitTransformer } from './commit'
-import type { GitHubLinkifyTransformer } from '../../types/transformer'
+import { usernameTransformer } from './username.js'
+import { pullRequestTransformer } from './pull-request.js'
+import { compareTransformer } from './compare.js'
+import { commitTransformer } from './commit.js'
+import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 
 const transformers = [
     usernameTransformer,

@@ -1,4 +1,4 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer'
+import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 import { regex } from '../regex'
 
 export const commitTransformer: GitHubLinkifyTransformer = (text: string) => {

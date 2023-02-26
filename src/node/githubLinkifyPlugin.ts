@@ -1,6 +1,6 @@
 import type { Page, Plugin } from '@vuepress/core'
 import { fs } from '@vuepress/utils'
-import { transform } from './plugins/transformers'
+import { transform } from './plugins/transformers/index.js'
 
 export const githubLinkifyPlugin = (): Plugin => ({
     name: 'github-linkify-plugin',

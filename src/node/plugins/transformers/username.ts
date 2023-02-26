@@ -1,5 +1,5 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer'
-import { regex } from '../regex'
+import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
+import { regex } from '../regex.js'
 
 export const usernameTransformer: GitHubLinkifyTransformer = (text: string) => {
     const replacer = (value, item) => text.replace(item[0], `::username::${ item[1] }::`)
