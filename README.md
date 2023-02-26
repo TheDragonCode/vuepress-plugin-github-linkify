@@ -28,14 +28,14 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 }
 ```
 
-[license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 
 [license-url]: LICENSE
 
 [npm-url]: https://npmjs.org/package/vuepress-plugin-github-linkify
 
-[npm-version-image]: https://img.shields.io/npm/v/vuepress-plugin-github-linkify.svg?style=flat
+[npm-version-image]: https://img.shields.io/npm/v/vuepress-plugin-github-linkify.svg?style=flat-square
 
-[npm-downloads-image]: https://img.shields.io/npm/dm/vuepress-plugin-github-linkify.svg?style=flat
+[npm-downloads-image]: https://img.shields.io/npm/dm/vuepress-plugin-github-linkify.svg?style=flat-square
 
 [npm-downloads-url]: https://npmcharts.com/compare/vuepress-plugin-github-linkify?minimal=true
