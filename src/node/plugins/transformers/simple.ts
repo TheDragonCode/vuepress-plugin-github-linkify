@@ -1,6 +1,6 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 import { regex } from '../regex.js'
-import { template } from '../template'
+import { template } from '../template.js'
 
 export const simpleCompact: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacer = function (value, item) {

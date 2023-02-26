@@ -1,6 +1,6 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 import { regex } from '../regex.js'
-import { template } from '../template'
+import { template } from '../template.js'
 
 export const commitCompact: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacer = (value, item) => value.replace(item[0], template('commit', `${ item[1] }/${ item[2] }`, item[3].substring(0, 7)))

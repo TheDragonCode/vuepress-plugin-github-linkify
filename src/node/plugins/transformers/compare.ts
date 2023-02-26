@@ -1,6 +1,6 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 import { regex } from '../regex.js'
-import { template } from '../template'
+import { template } from '../template.js'
 
 export const compareCompact: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacerFull = (value, item) => value.replace(item[0], template('compare', `${ item[1] }/${ item[2] }`, item[3], item[4]))
