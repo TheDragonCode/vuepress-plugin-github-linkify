@@ -1,5 +1,5 @@
 import type { Page, Plugin, PluginObject } from '@vuepress/core'
-import { colors, fs, logger } from '@vuepress/utils'
+import { fs, logger } from '@vuepress/utils'
 import { transform } from './plugins/transformers/index.js'
 
 export interface GithubLinkifyOptions
@@ -23,7 +23,7 @@ export const githubLinkifyPlugin = ({ repo }: GithubLinkifyOptions): Plugin => {
     }
 
     if (! repo) {
-        logger.warn`[${ plugin.name }] ${ colors.magenta('repo') } option is required`
+        logger.warn`[${ plugin.name }] "repo" option is required`
     }
 
     return plugin
