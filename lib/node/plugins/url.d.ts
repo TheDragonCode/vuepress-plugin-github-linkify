@@ -1,1 +1,1 @@
-export declare const url: (value: string, link?: string) => string;
+export declare const url: (repo: string, value: string, link?: string) => string;
