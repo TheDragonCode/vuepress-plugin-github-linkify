@@ -23,7 +23,7 @@ export const githubLinkifyPlugin = ({ repo }: GithubLinkifyOptions): Plugin => {
     }
 
     if (! repo) {
-        logger.warn`[${ plugin.name }] "repo" option is required`
+        logger.warn(`[${ plugin.name }] "repo" option is required`)
     }
 
     return plugin
