@@ -28,6 +28,16 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 }
 ```
 
+### Support links
+
+* [x] mentions
+* [x] commits
+* [x] pull requests
+* [x] compares
+* [ ] tags
+* [ ] trees
+* [ ] blobs
+
 ## Example
 
 ![before](.github/images/before.png)
