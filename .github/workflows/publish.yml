@@ -8,7 +8,7 @@ on:
         types: [ created ]
 
 jobs:
-    setup:
+    build:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v3
@@ -16,17 +16,6 @@ jobs:
                 with:
                     node-version: 18
                     registry-url: https://registry.npmjs.org/
-            -   name: Git setup
-                if: success()
-                run: |
-                    git config --local user.email "action@github.com"
-                    git config --local user.name "GitHub Action"
-    
-    build:
-        needs: setup
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v3
             -   run: npm i
             -   run: npm run build
     
@@ -35,6 +24,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v3
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+                    registry-url: https://registry.npmjs.org/
+            -   name: Git setup
+                run: |
+                    git config --local user.email "action@github.com"
+                    git config --local user.name "GitHub Action"
             -   run: npm version ${{ github.event.release.tag_name }} --no-git-tag-version
             -   run: git add .
             -   run: git commit -m "Release v${{ github.event.release.tag_name }}"
