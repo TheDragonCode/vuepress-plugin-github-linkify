@@ -25,3 +25,6 @@ jobs:
             -   run: npm publish
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            -   uses: ad-m/github-push-action@master
+                with:
+                    github_token: ${{ secrets.COMPOSER_TOKEN }}
