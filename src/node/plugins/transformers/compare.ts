@@ -15,7 +15,7 @@ export const compareCompact: GitHubLinkifyTransformer = (text: string, repo: str
 }
 
 export const compareExpand: GitHubLinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => value.replace(item[0], url(`${ item[2] }...${ item[3] }`, `${ item[1] }/compare/${ item[2] }...${ item[3] }`))
+    const replacer = (value, item) => value.replace(item[0], url(repo, `${ item[1].includes(repo) ? '' : item[1] + '#' }${ item[2] }...${ item[3] }`, `${ item[1] }/compare/${ item[2] }...${ item[3] }`))
 
     text = regex(text, /::compare::([\w\d.\-\/]+)::([\w\d.\-]+)::([\w\d.\-]+)::/g, replacer)
 
