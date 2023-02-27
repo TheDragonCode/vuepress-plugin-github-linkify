@@ -1,6 +1,6 @@
 {
     "name": "vuepress-plugin-github-linkify",
-    "version": "1.0.12",
+    "version": "1.0.13-beta.0",
     "description": "Fix display of GitHub links for Vuepress 2",
     "author": {
         "name": "Andrey Helldar",
@@ -33,7 +33,7 @@
     "module": "./lib/node/index.mts",
     "types": "./lib/node/index.d.ts",
     "files": [
-        "lib"
+        "lib/node"
     ],
     "engines": {
         "node": ">=18.14"
