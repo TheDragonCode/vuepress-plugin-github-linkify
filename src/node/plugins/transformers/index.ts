@@ -1,19 +1,19 @@
 import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 
-import { usernameCompact, usernameExpand } from './username.js'
+import { mentionCompact, mentionExpand } from './mention.js'
 import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
 import { compareCompact, compareExpand } from './compare.js'
 import { commitCompact, commitExpand } from './commit.js'
 
 const compact = [
-    usernameCompact,
+    mentionCompact,
     pullRequestCompact,
     compareCompact,
     commitCompact
 ]
 
 const expand = [
-    usernameExpand,
+    mentionExpand,
     pullRequestExpand,
     compareExpand,
     commitExpand
