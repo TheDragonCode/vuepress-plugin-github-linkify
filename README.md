@@ -30,11 +30,7 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 
 ## Example
 
-### Before
-
 ![before](.github/images/before.png)
-
-### After
 
 ![after](.github/images/after.png)
 
