@@ -36,7 +36,7 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 
 ### After
 
-![before](.github/images/after.png)
+![after](.github/images/after.png)
 
 ## License
 
