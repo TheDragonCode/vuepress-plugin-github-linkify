@@ -34,7 +34,7 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 * [x] commits
 * [x] pull requests
 * [x] compares
-* [ ] tags
+* [x] tags
 * [ ] trees
 * [ ] blobs
 
