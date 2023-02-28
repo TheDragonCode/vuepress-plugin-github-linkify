@@ -1,9 +1,10 @@
+import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
 import { regex } from '../regex.js'
 import { replace } from '../helpers.js'
 import { template } from '../template.js'
 import { url } from '../url.js'
 
-export const tagsCompact = (text: string, repo: string) => {
+export const tagsCompact: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacerFull = (value, item) => replace(value, item, template('tag', `${ item[1] }/${ item[2] }`, item[3]))
     const replacerShort = (value, item) => replace(value, item, template('tag', repo, item[1]))
 
@@ -14,7 +15,7 @@ export const tagsCompact = (text: string, repo: string) => {
     return text
 }
 
-export const tagsExpand = (text: string, repo: string) => {
+export const tagsExpand: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacer = (value, item) => value.replace(item[0], url(repo, `${ item[1].includes(repo) ? '' : item[1] + '#' }${ item[2].replace('v', '') }`, `${ item[1] }/releases/tag/${ item[2] }`))
 
     text = regex(text, /::tag::([\w\d.\-\/]+)::([\w\d.\-]+)::/g, replacer)
