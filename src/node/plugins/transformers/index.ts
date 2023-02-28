@@ -4,13 +4,15 @@ import { mentionCompact, mentionExpand } from './mention.js'
 import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
 import { compareCompact, compareExpand } from './compare.js'
 import { commitCompact, commitExpand } from './commit.js'
-import { tagsCompact, tagsExpand } from './tags'
+import { tagsCompact, tagsExpand } from './tags.js'
+import { treesCompact, treesExpand } from './trees.js'
 
 const compact = [
     mentionCompact,
     pullRequestCompact,
     compareCompact,
     commitCompact,
+    treesCompact,
     tagsCompact
 ]
 
@@ -19,6 +21,7 @@ const expand = [
     pullRequestExpand,
     compareExpand,
     commitExpand,
+    treesExpand,
     tagsExpand
 ]
 

@@ -18,7 +18,7 @@ export const pullRequestCompact: GitHubLinkifyTransformer = (text: string, repo:
 export const pullRequestExpand: GitHubLinkifyTransformer = (text: string, repo: string) => {
     const replacer = (value, item) => value.replace(item[0], url(repo, `${ item[1] }#${ item[2] }`, `${ item[1] }/pull/${ item[2] }`))
 
-    text = regex(text, /::pull_request::([\w\d\-_\/]+)::([\w\d\-_]+)::/g, replacer)
+    text = regex(text, /::pull_request::([\d\w.\-_\/]+)::([\d\w.\-_\/]+)::/g, replacer)
 
     return text
 }
