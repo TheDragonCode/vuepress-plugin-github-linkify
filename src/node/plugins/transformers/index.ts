@@ -6,6 +6,7 @@ import { compareCompact, compareExpand } from './compare.js'
 import { commitCompact, commitExpand } from './commit.js'
 import { tagsCompact, tagsExpand } from './tags.js'
 import { treesCompact, treesExpand } from './trees.js'
+import { blobsCompact, blobsExpand } from './blobs.js'
 
 const compact = [
     mentionCompact,
@@ -13,6 +14,7 @@ const compact = [
     compareCompact,
     commitCompact,
     treesCompact,
+    blobsCompact,
     tagsCompact
 ]
 
@@ -22,6 +24,7 @@ const expand = [
     compareExpand,
     commitExpand,
     treesExpand,
+    blobsExpand,
     tagsExpand
 ]
 
