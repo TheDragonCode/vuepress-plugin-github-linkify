@@ -1,22 +1,12 @@
 import type { LinkifyTransformer } from '../../types/transformer.js'
-import { regex } from '../regex.js'
-import { replace } from '../helpers.js'
-import { template } from '../template.js'
-import { url } from '../url.js'
+import { Replacer } from '../replacer'
 
-export const treesCompact: LinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => replace(value, item, template('tree', `${ item[1] }/${ item[2] }`, `${ item[3] }`))
+export const treesCompact: LinkifyTransformer = (text: string, repo: string) => Replacer
+    .create('tree', '#', repo, text, [
+        /\[[\s`#@]*\d+]\(https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/tree\/([\d\w.\-_\/]+)\)/g,
+        /https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/tree\/([\d\w.\-_\/]+)/g
+    ]).compact()
 
-    text = regex(text, /\[[\s`#@]*\d+]\(https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/tree\/([\d\w.\-_\/]+)\)/g, replacer)
-    text = regex(text, /https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/tree\/([\d\w.\-_\/]+)/g, replacer)
-
-    return text
-}
-
-export const treesExpand: LinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => replace(value, item, url(repo, `${ item[1].includes(repo) ? '' : item[1] + '#' }${ item[2] }`, `${ item[1] }/tree/${ item[2] }`))
-
-    text = regex(text, /::tree::([\d\w.\-_\/]+)::([\d\w.\-_\/]+)::/g, replacer)
-
-    return text
-}
+export const treesExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
+    .create('tree', '#', repo, text)
+    .expand()
