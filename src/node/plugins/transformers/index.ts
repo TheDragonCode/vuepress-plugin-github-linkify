@@ -1,4 +1,4 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
+import type { LinkifyTransformer } from '../../types/transformer.js'
 
 import { mentionCompact, mentionExpand } from './mention.js'
 import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
@@ -31,8 +31,8 @@ const expand = [
 const resolveRepoUrl = (url: string) => url.replace('https://github.com/', '')
 
 export const transform = (text: string, repo: string) => {
-    Array.from(compact, (transformer: GitHubLinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
-    Array.from(expand, (transformer: GitHubLinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
+    Array.from(compact, (transformer: LinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
+    Array.from(expand, (transformer: LinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
 
     return text
 }
