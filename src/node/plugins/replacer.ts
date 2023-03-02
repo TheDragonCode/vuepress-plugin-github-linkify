@@ -34,7 +34,9 @@ export class Replacer
         Array.from(patterns, (pattern: RegExp) => {
             const matches = this.manager.text.matchAll(pattern)
 
-            Array.from(matches, item => this.manager.text = callback(item))
+            Array.from(matches).reverse().forEach(
+                item => this.manager.text = callback(item)
+            )
         })
     }
 
@@ -54,10 +56,12 @@ export class Replacer
         let link: string = this.getFormatLink()
         let value: string = this.getFormatValue()
 
+        const isSameRepository = match[1].includes(this.getRepository())
+
         const replaces = this.getExpandReplaces()
 
-        const codePrefix: string = this.asCode() ? '<code>' : ''
-        const codeSuffix: string = this.asCode() ? '</code>' : ''
+        const codePrefix: string = this.asCode() && isSameRepository ? '<code>' : ''
+        const codeSuffix: string = this.asCode() && isSameRepository ? '</code>' : ''
 
         for (let i = 1; i <= 4; i++) {
             if (match[i] === undefined) {
@@ -73,7 +77,7 @@ export class Replacer
 
         link = link.replace('https://github.com/', '').replace('$key', this.getKey())
 
-        value = match[1].includes(this.getRepository())
+        value = isSameRepository
             ? value.replace(this.getRepository(), '').replace('/$key/', this.hasForceSplitter() ? this.getSplitter() : '')
             : value.replace('/$key/', this.getSplitter())
 
@@ -82,11 +86,11 @@ export class Replacer
 
     private replace(match: Array<string>, to: string): string
     {
-        return this.manager.text.replace(match[0], to)
-        // const index: number = match['index']
-        // const from: string = match[0]
-        //
-        // return text.slice(0, index) + to + text.slice(index + from.length)
+        // return this.manager.text.replace(match[0], to)
+        const index: number = match['index']
+        const from: string = match[0]
+
+        return this.manager.text.slice(0, index) + to + this.manager.text.slice(index + from.length)
     }
 
     private getRepository(): string
