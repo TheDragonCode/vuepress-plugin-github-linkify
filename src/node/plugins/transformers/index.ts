@@ -1,11 +1,11 @@
-import { mentionTransformer } from './mention'
-import { pullRequestTransformer } from './pull-request'
-import { commitTransformer } from './commit'
-import { compareTransformer } from './compare'
-import { treesTransformer } from './trees'
-import { blobsTransformer } from './blobs'
-import { tagsTransformer } from './tags'
-import type { ManagerContract } from '../manager'
+import { mentionTransformer } from './mention.js'
+import { pullRequestTransformer } from './pull-request.js'
+import { commitTransformer } from './commit.js'
+import { compareTransformer } from './compare.js'
+import { treesTransformer } from './trees.js'
+import { blobsTransformer } from './blobs.js'
+import { tagsTransformer } from './tags.js'
+import type { ManagerContract } from '../manager.js'
 
 const transformers = [
     mentionTransformer,

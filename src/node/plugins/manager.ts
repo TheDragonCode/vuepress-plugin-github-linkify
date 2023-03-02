@@ -1,4 +1,4 @@
-import { Replacer } from './replacer'
+import { Replacer } from './replacer.js'
 
 export interface ManagerContract
 {
