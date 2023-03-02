@@ -1,38 +1,25 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
+import { mentionTransformer } from './mention'
+import { pullRequestTransformer } from './pull-request'
+import { commitTransformer } from './commit'
+import { compareTransformer } from './compare'
+import { treesTransformer } from './trees'
+import { blobsTransformer } from './blobs'
+import { tagsTransformer } from './tags'
+import type { ManagerContract } from '../manager'
 
-import { mentionCompact, mentionExpand } from './mention.js'
-import { pullRequestCompact, pullRequestExpand } from './pull-request.js'
-import { compareCompact, compareExpand } from './compare.js'
-import { commitCompact, commitExpand } from './commit.js'
-import { tagsCompact, tagsExpand } from './tags.js'
-import { treesCompact, treesExpand } from './trees.js'
-import { blobsCompact, blobsExpand } from './blobs.js'
-
-const compact = [
-    mentionCompact,
-    pullRequestCompact,
-    compareCompact,
-    commitCompact,
-    treesCompact,
-    blobsCompact,
-    tagsCompact
+const transformers = [
+    mentionTransformer,
+    pullRequestTransformer,
+    compareTransformer,
+    commitTransformer,
+    treesTransformer,
+    blobsTransformer,
+    tagsTransformer
 ]
 
-const expand = [
-    mentionExpand,
-    pullRequestExpand,
-    compareExpand,
-    commitExpand,
-    treesExpand,
-    blobsExpand,
-    tagsExpand
-]
-
-const resolveRepoUrl = (url: string) => url.replace('https://github.com/', '')
-
-export const transform = (text: string, repo: string) => {
-    Array.from(compact, (transformer: GitHubLinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
-    Array.from(expand, (transformer: GitHubLinkifyTransformer) => text = transformer(text, resolveRepoUrl(repo)))
+export const transform = (text: string, repository: string): string => {
+    Array.from(transformers, (transformer: ManagerContract) => text = transformer.setRepository(repository).setText(text).compact())
+    Array.from(transformers, (transformer: ManagerContract) => text = transformer.setRepository(repository).setText(text).expand())
 
     return text
 }

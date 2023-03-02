@@ -28,7 +28,7 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 }
 ```
 
-### Support links
+### Support Links
 
 * [x] mentions
 * [x] commits

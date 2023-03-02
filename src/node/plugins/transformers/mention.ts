@@ -1,23 +1,11 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer.js'
-import { regex } from '../regex.js'
-import { replace } from '../helpers.js'
-import { template } from '../template.js'
-import { url } from '../url.js'
+import { Manager } from '../manager'
 
-export const mentionCompact: GitHubLinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => replace(value, item, template('mention', item[1]))
-
-    text = regex(text, /<\s*a.+@([a-zA-Z][\w\d\-_]*).+<\/\s*a\s*>/g, replacer)
-    text = regex(text, /\[[\s`@]*[\w\d\-]+[\s`]*]\(https:\/\/github\.com\/([\w\d\-]+)\/?\)/g, replacer)
-    text = regex(text, /@([a-zA-Z][\w\d\-_]*)/g, replacer)
-
-    return text
-}
-
-export const mentionExpand: GitHubLinkifyTransformer = (text: string, repo: string) => {
-    const replacer = (value, item) => value.replace(item[0], url(repo, `@${ item[1] }`, item[1]))
-
-    text = regex(text, /::mention::([\w\d\-_]+)::/g, replacer)
-
-    return text
-}
+export const mentionTransformer = Manager.create()
+    .setKey('mention')
+    .setSplitter('@', true)
+    .setCompactPatterns([
+        /<\s*a.+@([a-zA-Z][\w\d\-_]*).+<\/\s*a\s*>/g,
+        /\[[\s`@]*[\w\d\-]+[\s`]*]\(https:\/\/github\.com\/([\w\d\-]+)\/?\)/g,
+        /@([a-zA-Z][\w\d\-_]*)/g
+    ])
+    .setExpandFormat('/$key/$2', '$2')
