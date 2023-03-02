@@ -1,4 +1,4 @@
-import type { ManagerContract } from './manager';
+import type { ManagerContract } from './manager.js';
 export declare class Replacer {
     private manager;
     private block;

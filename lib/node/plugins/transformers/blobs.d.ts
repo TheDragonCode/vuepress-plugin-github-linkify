@@ -1,2 +1,2 @@
-import { Manager } from '../manager';
+import { Manager } from '../manager.js';
 export declare const blobsTransformer: Manager;
