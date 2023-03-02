@@ -1,3 +1,2 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer.js';
-export declare const treesCompact: GitHubLinkifyTransformer;
-export declare const treesExpand: GitHubLinkifyTransformer;
+import { Manager } from '../manager';
+export declare const treesTransformer: Manager;

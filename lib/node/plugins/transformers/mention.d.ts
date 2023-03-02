@@ -1,3 +1,2 @@
-import type { GitHubLinkifyTransformer } from '../../types/transformer.js';
-export declare const mentionCompact: GitHubLinkifyTransformer;
-export declare const mentionExpand: GitHubLinkifyTransformer;
+import { Manager } from '../manager';
+export declare const mentionTransformer: Manager;
