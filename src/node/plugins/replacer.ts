@@ -70,7 +70,7 @@ export class Replacer
 
             link = link.replace('$' + i, match[i])
 
-            value = replaces !== undefined && replaces[i] !== undefined
+            value = !! replaces?.[i]
                 ? value.replace('$' + i, replaces[i](match[i]))
                 : value.replace('$' + i, match[i])
         }
