@@ -1,6 +1,6 @@
 {
     "name": "vuepress-plugin-github-linkify",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Fix display of GitHub links for Vuepress 2",
     "author": {
         "name": "Andrey Helldar",
