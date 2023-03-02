@@ -2,6 +2,21 @@ import { Replacer } from './replacer'
 
 export interface ManagerContract
 {
+    key: string
+    repository: string
+    text: string
+
+    splitter: string
+    forceSplitter: boolean
+
+    patterns: Array<RegExp>
+
+    formatValue: string
+    formatLink: string
+    formatReplaces?: object
+
+    asCode: boolean
+
     setRepository(name: string): Manager
 
     setKey(key: string): Manager
@@ -16,6 +31,8 @@ export interface ManagerContract
 
     setExpandValueReplaces(values: object): Manager
 
+    setAsCode(): Manager
+
     compact(): string
 
     expand(): string
@@ -23,15 +40,20 @@ export interface ManagerContract
 
 export class Manager implements ManagerContract
 {
-    public key?: string
+    public key: string = 'key'
+    public repository: string = ''
+    public text: string = ''
+
     public splitter: string = '#'
-    public repository?: string
-    public text?: string
     public forceSplitter: boolean = false
+
     public patterns: Array<RegExp> = []
+
     public formatValue: string = '$1/$key/$2'
     public formatLink: string = '$1/$key/$2'
     public formatReplaces?: object
+
+    public asCode: boolean = false
 
     static create(): Manager
     {
@@ -89,17 +111,25 @@ export class Manager implements ManagerContract
         return this
     }
 
+    setAsCode(): Manager
+    {
+        this.asCode = true
+
+        return this
+    }
+
     compact(): string
     {
-        return Replacer
-            .create(this.key, this.splitter, this.repository, this.text, this.patterns)
-            .compact()
+        return this.resolveReplacer().compact()
     }
 
     expand(): string
     {
-        return Replacer
-            .create(this.key, this.splitter, this.repository, this.text)
-            .expand(this.formatValue, this.forceSplitter, this.formatLink, this.formatReplaces)
+        return this.resolveReplacer().expand()
+    }
+
+    private resolveReplacer(): Replacer
+    {
+        return Replacer.create(this)
     }
 }

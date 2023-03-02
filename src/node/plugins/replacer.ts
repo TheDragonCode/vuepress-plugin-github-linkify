@@ -1,70 +1,63 @@
+import type { ManagerContract } from './manager'
+
 export class Replacer
 {
-    private readonly repository: string
-    private readonly splitter
-    private text: string
-    private readonly patterns: RegExp | Array<RegExp> | undefined
-    private readonly key: string
-    private readonly firstItem: string | undefined
-    private readonly secondItem: string | undefined
-    private readonly separator = '::'
+    private manager: ManagerContract
+    private block: string = ':'
 
-    constructor(key: string, splitter: string, repository: string, text: string, patterns?: RegExp | Array<RegExp>, firstItem?: string, secondItem?: string)
+    constructor(manager: ManagerContract)
     {
-        this.key = key
-        this.splitter = splitter
-        this.repository = repository
-        this.text = text
-        this.patterns = patterns
-        this.firstItem = firstItem
-        this.secondItem = secondItem
+        this.manager = manager
     }
 
-    static create(key: string, splitter: string, repository: string, text: string, pattern?: RegExp | Array<RegExp>, firstItem?: string, secondItem?: string): Replacer
+    static create(manager: ManagerContract): Replacer
     {
-        return new Replacer(key, splitter, repository, text, pattern, firstItem, secondItem)
+        return new Replacer(manager)
     }
 
     compact(): string
     {
         this.regex(this.getPatterns(), item => this.replace(item, this.template(item)))
 
-        return this.text
+        return this.manager.text
     }
 
-    expand(formatValue: string = '$1/$key/$2', forceSplitter: boolean = false, formatLink?: string, valueReplaces?: object): string
+    expand(): string
     {
-        const patterns = [new RegExp(`${this.separator}${this.key}${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}([\\w\\d\\/.\\-_]+)[${this.separator}]{0,2}([\\w\\d\\/.\\-_]+)?[${this.separator}]{0,2}`, 'g')]
+        this.regex(this.getExpandPattern(), item => this.replace(item, this.url(item)))
 
-        this.regex(patterns, item => this.replace(item, this.url(item, formatValue, formatLink, forceSplitter, valueReplaces)))
-
-        return this.text
+        return this.manager.text
     }
 
     private regex(patterns: Array<RegExp>, callback): void
     {
         Array.from(patterns, (pattern: RegExp) => {
-            const matches = this.text.matchAll(pattern)
+            const matches = this.manager.text.matchAll(pattern)
 
-            Array.from(matches, item => this.text = callback(item))
+            Array.from(matches, item => this.manager.text = callback(item))
         })
     }
 
     private template(match: Array<string>): string
     {
         let args = match[3] === undefined
-            ? [this.repository, match[1], match[2]]
+            ? [this.getRepository(), match[1], match[2]]
             : [`${ match[1] }/${ match[2] }`, match[3], match[4]]
 
-        return this.separator + [this.key].concat(
+        return this.getBlock() + [this.getKey()].concat(
             args.filter(val => !! val)
-        ).join(this.separator) + this.separator
+        ).join(this.getBlock()) + this.getBlock()
     }
 
-    private url(match: Array<string>, formatValue: string, formatLink?: string, forceSplitter: boolean = false, valueReplaces?: object): string
+    private url(match: Array<string>): string
     {
-        let link = formatLink || formatValue
-        let value = formatValue
+        let link: string = this.getFormatLink()
+        let value: string = this.getFormatValue()
+
+        const replaces = this.getExpandReplaces()
+
+        const codePrefix: string = this.asCode() ? '<code>' : ''
+        const codeSuffix: string = this.asCode() ? '</code>' : ''
 
         for (let i = 1; i <= 4; i++) {
             if (match[i] === undefined) {
@@ -73,35 +66,87 @@ export class Replacer
 
             link = link.replace('$' + i, match[i])
 
-            value = valueReplaces !== undefined && valueReplaces[i] !== undefined
-                ? value.replace('$' + i, valueReplaces[i](match[i]))
+            value = replaces !== undefined && replaces[i] !== undefined
+                ? value.replace('$' + i, replaces[i](match[i]))
                 : value.replace('$' + i, match[i])
         }
 
-        link = link.replace('https://github.com/', '').replace('$key', this.key)
+        link = link.replace('https://github.com/', '').replace('$key', this.getKey())
 
-        value = match[1].includes(this.repository)
-            ? value.replace(this.repository, '').replace('/$key/', forceSplitter ? this.splitter : '')
-            : value.replace('/$key/', this.splitter)
+        value = match[1].includes(this.getRepository())
+            ? value.replace(this.getRepository(), '').replace('/$key/', this.hasForceSplitter() ? this.getSplitter() : '')
+            : value.replace('/$key/', this.getSplitter())
 
-        return `<a href="https://github.com/${ link }" target="_blank" rel="noopener noreferrer">${ value }<ExternalLinkIcon /></a>`
+        return `<a href="https://github.com/${ link }" target="_blank" rel="noopener noreferrer">${ codePrefix }${ value }${ codeSuffix }<ExternalLinkIcon /></a>`
     }
 
     private replace(match: Array<string>, to: string): string
     {
-        return this.text.replace(match[0], to)
+        return this.manager.text.replace(match[0], to)
         // const index: number = match['index']
         // const from: string = match[0]
         //
         // return text.slice(0, index) + to + text.slice(index + from.length)
     }
 
+    private getRepository(): string
+    {
+        return this.manager.repository
+    }
+
+    private getBlock(): string
+    {
+        return this.block.repeat(2)
+    }
+
+    private getKey(): string
+    {
+        return this.manager.key
+    }
+
     private getPatterns(): Array<RegExp>
     {
-        if (this.patterns === undefined) {
-            throw Error('The "patterns" parameter is required')
-        }
+        return this.manager.patterns
+    }
 
-        return Array.isArray(this.patterns) ? this.patterns : [this.patterns]
+    private getFormatValue(): string
+    {
+        return this.manager.formatValue
+    }
+
+    private getFormatLink(): string
+    {
+        return this.manager.formatLink
+    }
+
+    private getSplitter(): string
+    {
+        return this.manager.splitter
+    }
+
+    private hasForceSplitter(): boolean
+    {
+        return this.manager.forceSplitter
+    }
+
+    private getExpandReplaces(): object | undefined
+    {
+        return this.manager.formatReplaces
+    }
+
+    private getExpandPattern(): Array<RegExp>
+    {
+        return [new RegExp(
+            `${ this.block }{2}${ this.getKey() }${ this.block }{2}` +
+            `([\\w\\d\\/.\\-_]+)${ this.block }{2}` +
+            `([\\w\\d\\/.\\-_]+)${ this.block }{2}` +
+            `([\\w\\d\\/.\\-_]+)?${ this.block }{0,2}`,
+            'g'
+        )]
+    }
+
+    private asCode(): boolean
+    {
+        return this.manager.asCode
     }
 }

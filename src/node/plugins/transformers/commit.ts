@@ -11,3 +11,4 @@ export const commitTransformer = Manager.create()
     .setExpandValueReplaces({
         2: (value: string) => value.substring(0, 7)
     })
+    .setAsCode()
