@@ -32,11 +32,11 @@ export class Replacer
         return this.text
     }
 
-    expand(format: string = '$1/$key/$2', forceSplitter: boolean = false, pattern?: RegExp): string
+    expand(formatValue: string = '$1/$key/$2', forceSplitter: boolean = false, formatLink?: string, pattern?: RegExp, valueReplaces?: object): string
     {
-        const patterns = pattern !== undefined ? [pattern] : [new RegExp(`${this.separator}${this.key}${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}`, 'g')]
+        const patterns = pattern !== undefined ? [pattern] : [new RegExp(`${this.separator}${this.key}${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}([\\w\\d\\/.\\-_]+)[${this.separator}]{0,2}([\\w\\d\\/.\\-_]+)?[${this.separator}]{0,2}`, 'g')]
 
-        this.regex(patterns, item => this.replace(item, this.url(item, format, forceSplitter)))
+        this.regex(patterns, item => this.replace(item, this.url(item, formatValue, formatLink, forceSplitter, valueReplaces)))
 
         return this.text
     }
@@ -63,10 +63,10 @@ export class Replacer
         ).join(this.separator) + this.separator
     }
 
-    private url(match: Array<string>, format: string, forceSplitter: boolean = false): string
+    private url(match: Array<string>, formatValue: string, formatLink?: string, forceSplitter: boolean = false, valueReplaces?: object): string
     {
-        let link = format
-        let value = format
+        let link = formatLink || formatValue
+        let value = formatValue
 
         for (let i = 1; i <= 4; i++) {
             if (match[i] === undefined) {
@@ -74,7 +74,10 @@ export class Replacer
             }
 
             link = link.replace('$' + i, match[i])
-            value = value.replace('$' + i, match[i])
+
+            value = valueReplaces !== undefined && valueReplaces[i] !== undefined
+                ? value.replace('$' + i, valueReplaces[i](match[i]))
+                : value.replace('$' + i, match[i])
         }
 
         link = link.replace('https://github.com/', '').replace('$key', this.key)

@@ -10,4 +10,4 @@ export const mentionCompact: LinkifyTransformer = (text: string, repo: string) =
 
 export const mentionExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
     .create('mention', '@', repo, text)
-    .expand('/$key/$2', true)
+    .expand('/$key/$2', true, '$2')

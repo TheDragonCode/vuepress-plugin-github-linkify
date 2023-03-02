@@ -9,5 +9,5 @@ export const tagsCompact: LinkifyTransformer = (text: string, repo: string) => R
     ]).compact()
 
 export const tagsExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('tag', 'v', repo, text)
-    .expand('$1/releases/tag/$2', true)
+    .create('tag', '#', repo, text)
+    .expand('$1/$key/$2', false, '$1/releases/tag/$2')

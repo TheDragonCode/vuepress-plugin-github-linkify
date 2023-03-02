@@ -6,9 +6,11 @@ export const commitCompact: LinkifyTransformer = (text: string, repo: string) =>
         /<a.*href\s?=\s?"?https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/commit\/([\w\d]{40})"?.*>.*<\/a>/g,
         /\[[\w\d\s`]+]\(https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/commit\/([\w\d]{40})\)/g,
         /https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/commit\/([\w\d]{40})/g,
-        /[^\D\W\S:]*([\w\d]{40})[^:]/g
+        /[^\D\W\S:]*([\w\d]{40})(?!:)/g
     ]).compact()
 
 export const commitExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
     .create('commit', '#', repo, text)
-    .expand()
+    .expand('$1/$key/$2', false, '$1/$key/$2', undefined, {
+        2: (value: string) => value.substring(0, 7)
+    })

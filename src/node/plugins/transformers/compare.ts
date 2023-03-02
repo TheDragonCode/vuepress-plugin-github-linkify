@@ -9,7 +9,5 @@ export const compareCompact: LinkifyTransformer = (text: string, repo: string) =
     ]).compact()
 
 export const compareExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('compare', '#', repo, text, [
-        /::compare::([\w\d.\-\/]+)::([\w\d.\-]+)::([\w\d.\-]+)::/g
-    ])
-    .expand('$1/$key/$2...$2')
+    .create('compare', '#', repo, text)
+    .expand('$1/$key/$2...$3', false)
