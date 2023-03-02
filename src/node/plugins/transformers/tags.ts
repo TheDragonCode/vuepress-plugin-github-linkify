@@ -1,13 +1,10 @@
-import type { LinkifyTransformer } from '../../types/transformer.js'
-import { Replacer } from '../replacer'
+import { Manager } from '../manager'
 
-export const tagsCompact: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('tag', 'v', repo, text, [
+export const tagsTransformer = Manager.create()
+    .setKey('tag')
+    .setCompactPatterns([
         /\[[\s\w\d`.\-]+]\(https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/releases\/tag\/(v?\d+\.\d+\.\d+-?\w*\.?\d*)\)/g,
         /https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/releases\/tag\/(v?\d+\.\d+\.\d+-?\w*\.?\d*)/g
         // /(?<!:)(?<=^|\s)(v?\d+\.\d+\.\d+-?\w*\.?\d*)(?<!:)/g
-    ]).compact()
-
-export const tagsExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('tag', '#', repo, text)
-    .expand('$1/$key/$2', false, '$1/releases/tag/$2')
+    ])
+    .setExpandFormat('$1/$key/$2', '$1/releases/tag/$2')

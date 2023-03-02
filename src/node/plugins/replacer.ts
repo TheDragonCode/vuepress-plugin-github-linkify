@@ -32,9 +32,9 @@ export class Replacer
         return this.text
     }
 
-    expand(formatValue: string = '$1/$key/$2', forceSplitter: boolean = false, formatLink?: string, pattern?: RegExp, valueReplaces?: object): string
+    expand(formatValue: string = '$1/$key/$2', forceSplitter: boolean = false, formatLink?: string, valueReplaces?: object): string
     {
-        const patterns = pattern !== undefined ? [pattern] : [new RegExp(`${this.separator}${this.key}${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}([\\w\\d\\/.\\-_]+)[${this.separator}]{0,2}([\\w\\d\\/.\\-_]+)?[${this.separator}]{0,2}`, 'g')]
+        const patterns = [new RegExp(`${this.separator}${this.key}${this.separator}([\\w\\d\\/.\\-_]+)${this.separator}([\\w\\d\\/.\\-_]+)[${this.separator}]{0,2}([\\w\\d\\/.\\-_]+)?[${this.separator}]{0,2}`, 'g')]
 
         this.regex(patterns, item => this.replace(item, this.url(item, formatValue, formatLink, forceSplitter, valueReplaces)))
 
@@ -55,8 +55,6 @@ export class Replacer
         let args = match[3] === undefined
             ? [this.repository, match[1], match[2]]
             : [`${ match[1] }/${ match[2] }`, match[3], match[4]]
-
-        console.log()
 
         return this.separator + [this.key].concat(
             args.filter(val => !! val)

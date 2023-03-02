@@ -1,12 +1,8 @@
-import type { LinkifyTransformer } from '../../types/transformer.js'
-import { Replacer } from '../replacer.js'
+import { Manager } from '../manager'
 
-export const blobsCompact: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('blob', '#', repo, text, [
+export const blobsTransformer = Manager.create()
+    .setKey('blob')
+    .setCompactPatterns([
         /\[[\w\d\s`]+]\(https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/blob\/([\w\d\/.\-_]+)\)/g,
         /https:\/\/github\.com\/([\w\d\-_]+)\/([\w\d\-_]+)\/blob\/([\w\d\/.\-_]+)/g
-    ]).compact()
-
-export const blobsExpand: LinkifyTransformer = (text: string, repo: string) => Replacer
-    .create('blob', '#', repo, text)
-    .expand()
+    ])
