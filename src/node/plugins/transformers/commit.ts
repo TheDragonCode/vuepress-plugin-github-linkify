@@ -1,4 +1,4 @@
-import { Manager } from '../manager'
+import { Manager } from '../manager.js'
 
 export const commitTransformer = Manager.create()
     .setKey('commit')
