@@ -1,6 +1,6 @@
 # Vuepress Plugin GitHub Linkify
 
-![the dragon code github linkify](https://preview.dragon-code.pro/the-dragon-code/github-linkify.svg?brand=vuepress&mode=dark)
+![the dragon code github linkify](https://banners.beyondco.de/GitHub%20Linkify.png?theme=light&packageManager=npm+install&packageName=-D+vuepress-plugin-github-linkify&pattern=topography&style=style_2&description=by+The+Dragon+Code&md=1&showWatermark=1&fontSize=100px&images=link)
 
 Finding and fixing GitHub links
 
